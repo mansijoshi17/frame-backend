@@ -1,0 +1,35 @@
+name: Deploy to Development Server
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2 
+    - name: deploy using ssh
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: 22
+        script: | 
+          cd /var/www/cointopper-admin-backend/
+          git pull origin master 
+          npm install 
+          pm2 restart server
+          pm2 save 
+          pm2 startup 
+          pm2 save 
+          sudo systemctl restart nginx
+
+
+
+
+
