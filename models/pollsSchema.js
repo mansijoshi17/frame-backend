@@ -13,5 +13,9 @@ const PollsSchema = new Schema({
     type: Number,
     required: true,
   },
+  endDate: {
+    type: Date,
+    required: true
+  }
 });
 module.exports = Item = mongoose.model("poll", PollsSchema);

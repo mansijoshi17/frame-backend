@@ -8,6 +8,7 @@ router.post("/add", (req, res) => {
     title: req.body.title,
     choices: req.body.choices,
     fid: req.body.fid,
+    endDate: req.body.endDate,
   });
 
   newPoll
@@ -37,9 +38,7 @@ router.get("/:id", async (req, res) => {
     }
 
     if (!poll) {
-      return res
-        .status(404)
-        .json({ success: false, error: `Poll not found` });
+      return res.status(404).json({ success: false, error: `Poll not found` });
     }
     return res.status(200).json({ success: true, data: poll });
   }).catch((err) => console.log(err));
