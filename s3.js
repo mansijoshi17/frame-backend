@@ -14,6 +14,7 @@ const bucketName = "superfunsocial";
 const s3 = new AWS.S3({
   params: { Bucket: bucketName },
   region: "ap-south-1",
+  signatureVersion: 'v4'
 });
 
 async function generateUploadURL() {
@@ -23,7 +24,7 @@ async function generateUploadURL() {
   const params = {
     Bucket: bucketName,
     Key: imageName,
-    Expires: 60,
+    Expires: 600, // 10 mins
   };
 
   const uploadURL = await s3.getSignedUrlPromise("putObject", params);
