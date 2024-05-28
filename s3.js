@@ -13,7 +13,7 @@ const bucketName = "superfunsocial";
 
 const s3 = new AWS.S3({
   params: { Bucket: bucketName },
-  region: "ap-south-1",
+  region: "eu-north-1",
   signatureVersion: 'v4'
 });
 
